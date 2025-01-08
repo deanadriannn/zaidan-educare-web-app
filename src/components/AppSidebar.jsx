@@ -1,17 +1,11 @@
 import * as React from "react"
 import {
-  GalleryVerticalEnd,
   Home,
   Database,
-  CalendarClock,
-  Clock,
-  CircleUserRound,
-  CalendarOff,
-  Calendar1,
-  FileChartColumn,
-  Files,
+  CreditCard,
+  ChartPie,
+  BellRing
 } from "lucide-react"
-import { IoLogoAndroid } from "react-icons/io";
 import { NavMain } from "@/components/NavMain"
 import { NavUser } from "@/components/NavUser"
 import {
@@ -22,144 +16,112 @@ import {
   SidebarRail,
   SidebarMenuButton
 } from "@/components/ui/sidebar"
-import avatarUrl from "@/assets/avatar.jpeg"
 import { ScrollArea } from "./ui/scroll-area"
 import { redirect } from "react-router"
+import avatarUrl from "@/assets/avatar.jpg"
+import logoUrl from "@/assets/logo.jpeg"
 
+// TODO: Get role from auth here
+const currentUser = "Administrator"
 const data = {
   user: {
     name: "Nama",
     email: "email@example.com",
     avatar: avatarUrl,
   },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/",
-      icon: Home,
-    },
-    // {
-    //   title: "User Profile",
-    //   url: "/user-profile",
-    //   icon: CircleUserRound,
-    // },
-    {
-      title: "Master",
-      url: "#",
-      icon: Database,
-      activeParams: "master",
-      items: [
-        {
-          title: "Data Siswa",
-          url: "/master/student",
-        },
-        // {
-        //   title: "User Master",
-        //   url: "#",
-        //   activeParams: "master",
-        //   items: [
-        //     {
-        //       title: "Data Siswa",
-        //       url: "/master/student",
-        //     },
-        //     {
-        //       title: "Data Guru",
-        //       url: "#",
-        //     },
-        //   ]
-        // },
-        // {
-        //   title: "Kalendar Tahun Ajaran",
-        //   url: "#",
-        // },
-        // {
-        //   title: "Kalendar Master",
-        //   url: "#",
-        // },
-        // {
-        //   title: "Jadwal Pelajaran",
-        //   url: "#",
-        // },
-        // {
-        //   title: "Master Kelas",
-        //   url: "#",
-        // },
-        // {
-        //   title: "Master Mata Pelajaran",
-        //   url: "#",
-        // },
-        // {
-        //   title: "School Settings",
-        //   url: "#",
-        // },
-      ],
-    },
-    // {
-    //   title: "Absensi Guru",
-    //   url: "#",
-    //   icon: CalendarClock,
-    // },
-    // {
-    //   title: "Absensi Siswa",
-    //   url: "#",
-    //   icon: CalendarClock,
-    // },
-    // {
-    //   title: "Uncomplete Guru",
-    //   url: "#",
-    //   icon: Clock,
-    // },
-    // {
-    //   title: "Uncomplete Siswa",
-    //   url: "#",
-    //   icon: Clock,
-    // },
-    // {
-    //   title: "My Uncomplete",
-    //   url: "#",
-    //   icon: Clock,
-    // },
-    // {
-    //   title: "Leave Siswa",
-    //   url: "#",
-    //   icon: CalendarOff,
-    // },
-    // {
-    //   title: "Leave Guru",
-    //   url: "#",
-    //   icon: CalendarOff,
-    // },
-    // {
-    //   title: "My Leave",
-    //   url: "#",
-    //   icon: CalendarOff,
-    // },
-    // {
-    //   title: "Jadwal Mengajar",
-    //   url: "#",
-    //   icon: Calendar1,
-    // },
-    // {
-    //   title: "Rekap Absensi Siswa",
-    //   url: "#",
-    //   icon: FileChartColumn,
-    // },
-    // {
-    //   title: "Rekap Absensi Guru",
-    //   url: "#",
-    //   icon: FileChartColumn,
-    // },
-    // {
-    //   title: "Documents",
-    //   url: "#",
-    //   icon: Files,
-    // },
-    // {
-    //   title: "Mobile Application",
-    //   url: "#",
-    //   icon: IoLogoAndroid,
-    // },
-  ],
+  navMain: {
+    "Ketua Yayasan": [
+      {
+        title: "Dasbor",
+        url: "/",
+        icon: Home,
+      },
+      {
+        title: "Status Pembayaran",
+        url: "#",
+        icon: CreditCard
+      },
+      {
+        title: "Rekapitulasi Penerimaan Dana",
+        url: "#",
+        icon: Database
+      },
+      {
+        title: "Grafik Transaksi Penerimaan Dana",
+        url: "#",
+        icon: ChartPie
+      }
+    ],
+    "Bendahara": [
+      {
+        title: "Dasbor",
+        url: "/",
+        icon: Home,
+      },
+      {
+        title: "Transaksi Tagihan Siswa",
+        url: "#",
+        icon: CreditCard
+      },
+      {
+        title: "Transaksi Penerimaan Dana",
+        url: "#",
+        icon: Database
+      },
+      {
+        title: "Pengaturan Notifikasi Penagihan",
+        url: "#",
+        icon: BellRing
+      },
+      {
+        title: "Status Pembayaran",
+        url: "#",
+        icon: CreditCard
+      },
+      {
+        title: "Rekapitulasi Penerimaan Dana",
+        url: "#",
+        icon: Database
+      },
+      {
+        title: "Grafik Transaksi Penerimaan Dana",
+        url: "#",
+        icon: ChartPie
+      }
+    ],
+    "Administrator": [
+      {
+        title: "Dasbor",
+        url: "/",
+        icon: Home,
+      },
+      {
+        title: "Data Siswa",
+        url: "#",
+        icon: Database
+      },
+      {
+        title: "Data Transaksi Penerimaan",
+        url: "#",
+        icon: Database,
+        activeParams: "master",
+        items: [
+          {
+            title: "Jenis Biaya Pendidikan",
+            url: "#",
+          },
+          {
+            title: "Bank Penerima",
+            url: "#",
+          },
+          {
+            title: "Pengguna Aplikasi",
+            url: "#",
+          },
+        ],
+      }
+    ]
+  }
 }
 
 export function AppSidebar({ ...props }) {
@@ -168,16 +130,16 @@ export function AppSidebar({ ...props }) {
       <SidebarHeader>
         <SidebarMenuButton
           size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           onClick={() => redirect("/")}
+          className="hover:bg-transparent hover:text-sidebar-foreground"
         >
           <a href="/" className="flex items-center space-x-2">
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-              <GalleryVerticalEnd className="size-4" />
+            <div className="flex aspect-square size-8 items-center justify-center">
+              <img src={logoUrl} className="text-black" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">
-                Application Name
+                Zaidan Educare
               </span>
             </div>
           </a>
@@ -185,12 +147,12 @@ export function AppSidebar({ ...props }) {
       </SidebarHeader>
       <SidebarContent>
         <ScrollArea>
-          <NavMain items={data.navMain} />
+          <NavMain items={data.navMain[currentUser]} />
         </ScrollArea>
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   )
