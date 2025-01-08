@@ -7,60 +7,37 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { useLocation } from 'react-router'
-import { FaInstagram, FaFacebookF } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { 
+  FaInstagram, 
+  FaFacebookSquare, 
+  FaYoutube 
+} from "react-icons/fa";
+import { Globe, LogOut } from 'lucide-react'
+import avatarUrl from "@/assets/avatar.jpg"
+import { Button } from '@/components/ui/button'
+
+const user = {
+  name: "Nama",
+  email: "email@example.com",
+  avatar: avatarUrl,
+}
 
 const footerContent = [
   {
-    title: 'Example 1',
-    items: [
-      {
-        title: 'Example 1',
-        link: '#'
-      },
-      {
-        title: 'Example 2',
-        link: '#'
-      },
-      {
-        title: 'Example 3',
-        link: '#'
-      }
-    ]
+    icon: Globe,
+    url: "https://www.zaidaneducare.sch.id/"
   },
   {
-    title: 'Example 2',
-    items: [
-      {
-        title: 'Example 1',
-        link: '#'
-      },
-      {
-        title: 'Example 2 fs fds f ds',
-        link: '#'
-      },
-      {
-        title: 'Example 3',
-        link: '#'
-      }
-    ]
+    icon: FaFacebookSquare,
+    url: "https://www.facebook.com/ZaidanEducareBandung"
   },
   {
-    title: 'Example 3',
-    items: [
-      {
-        title: 'Example 1',
-        link: '#'
-      },
-      {
-        title: 'Example 2',
-        link: '#'
-      },
-      {
-        title: 'Example 3 fds sdsf fd',
-        link: '#'
-      }
-    ]
+    icon: FaInstagram,
+    url: "https://www.instagram.com/sekolah_zaidan_educare/"
+  },
+  {
+    icon: FaYoutube,
+    url: "https://www.youtube.com/channel/UCNmieE6rUWz0MUbEV13EqGA"
   }
 ]
 
@@ -76,48 +53,38 @@ const Layout = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className='flex justify-between w-full'>
-            <div className="flex items-center gap-2 px-4">
+        <header className="mx-4 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 mt-1">
+          <div className='flex justify-between items-center w-full bg-sidebar h-full rounded-xl px-4'>
+            <div className="flex items-center gap-2">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
               <h1 className="text-lg font-semibold">
                 {locationName[location.pathname]}
               </h1>
             </div>
+            <div className='flex items-center gap-2'>
+              <span className='font-bold'>
+                Nama Pengguna
+              </span>
+              <Button variant="destructive">
+                <LogOut />
+              </Button>
+            </div>
           </div>
         </header>
-        <main className='flex flex-auto gap-4 p-4 pt-0 shrink-0 min-h-[100vh]'>
+        <main className='flex flex-auto gap-4 px-4 mt-4 shrink-0 min-h-[100vh]'>
           <Outlet />
         </main>
-        <footer className="flex h-auto shrink-0 items-center gap-2 transition-[width,height] ease-linear">
-          <div className='flex flex-col justify-between w-full h-full gap-8'>
-            <div className="flex flex-col gap-4 px-4">
-              <h1 className="text-2xl font-bold">
-                Get in Touch
-              </h1>
-              <div className='flex gap-2'>
-                <FaInstagram className='text-3xl' />
-                <FaFacebookF className='text-3xl' />
-                <FaXTwitter className='text-3xl' />
-              </div>
-            </div>
-
-            <div className='flex w-full gap-16'>
-              {footerContent.map((content, index) => (
-                <div className="flex flex-col gap-4 px-4" key={index}>
-                  <h1 className="text-lg font-semibold">
-                    {content.title}
-                  </h1>
-                  {content.items.map((item, index) => (
-                    <p className='hover:underline hover:cursor-pointer underline-offset-4' key={index}>
-                      {item.title}
-                    </p>
-                  ))}
-                </div>
-              ))}
-            </div>
-
+        <footer className="mx-4 mt-4 mb-1 flex h-16 shrink-0 justify-center items-center gap-2 transition-[width,height] ease-linear bg-sidebar rounded-xl">
+          <span className='mr-4'>
+            Zaidan Educare © 2025
+          </span>
+          <div className='flex items-center justify-center gap-2'>
+            {footerContent.map((content) => (
+              <a href={content.url} key={content.url} target="_blank">
+                <content.icon className='text-3xl' />
+              </a>
+            ))}
           </div>
         </footer>
       </SidebarInset>

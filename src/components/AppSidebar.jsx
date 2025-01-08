@@ -7,7 +7,6 @@ import {
   BellRing
 } from "lucide-react"
 import { NavMain } from "@/components/NavMain"
-import { NavUser } from "@/components/NavUser"
 import {
   Sidebar,
   SidebarContent,
@@ -151,9 +150,6 @@ export function AppSidebar({ ...props }) {
           <NavMain items={data.navMain[currentUser]} />
         </ScrollArea>
       </SidebarContent>
-      {/* <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   )
