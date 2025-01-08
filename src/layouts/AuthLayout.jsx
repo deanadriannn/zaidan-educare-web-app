@@ -1,4 +1,3 @@
-import { ModeToggle } from "@/components/ModeToggle"
 import { GalleryVerticalEnd } from "lucide-react"
 import { Outlet } from "react-router"
 import authLogo from "@/assets/auth-logo.svg"
@@ -14,7 +13,6 @@ export default function AuthLayout() {
             </div>
             Application Name
           </a>
-          <ModeToggle />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">

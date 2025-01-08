@@ -1,4 +1,3 @@
-import { ModeToggle } from '@/components/ModeToggle'
 import { Outlet } from 'react-router'
 import { AppSidebar } from "@/components/AppSidebar"
 import { Separator } from "@/components/ui/separator"
@@ -86,10 +85,6 @@ const Layout = () => {
                 {locationName[location.pathname]}
               </h1>
             </div>
-
-            <div className='px-4'>
-              <ModeToggle />
-            </div>
           </div>
         </header>
         <main className='flex flex-auto gap-4 p-4 pt-0 shrink-0 min-h-[100vh]'>
@@ -109,13 +104,13 @@ const Layout = () => {
             </div>
 
             <div className='flex w-full gap-16'>
-              {footerContent.map((content) => (
-                <div className="flex flex-col gap-4 px-4">
+              {footerContent.map((content, index) => (
+                <div className="flex flex-col gap-4 px-4" key={index}>
                   <h1 className="text-lg font-semibold">
                     {content.title}
                   </h1>
-                  {content.items.map((item) => (
-                    <p className='hover:underline hover:cursor-pointer underline-offset-4'>
+                  {content.items.map((item, index) => (
+                    <p className='hover:underline hover:cursor-pointer underline-offset-4' key={index}>
                       {item.title}
                     </p>
                   ))}

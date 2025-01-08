@@ -114,12 +114,13 @@ const data = {
             title: "Bank Penerima",
             url: "#",
           },
-          {
-            title: "Pengguna Aplikasi",
-            url: "#",
-          },
         ],
-      }
+      },
+      {
+        title: "Data Pengguna Aplikasi",
+        url: "#",
+        icon: Database,
+      },
     ]
   }
 }
