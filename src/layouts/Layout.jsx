@@ -13,14 +13,19 @@ import {
   FaYoutube 
 } from "react-icons/fa";
 import { Globe, LogOut } from 'lucide-react'
-import avatarUrl from "@/assets/avatar.jpg"
 import { Button } from '@/components/ui/button'
-
-const user = {
-  name: "Nama",
-  email: "email@example.com",
-  avatar: avatarUrl,
-}
+import { Card } from '@/components/ui/card'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 const footerContent = [
   {
@@ -44,40 +49,62 @@ const footerContent = [
 const Layout = () => {
   const location = useLocation()
   const locationName = {
-    '/': 'Dashboard',
-    '/master/student': 'Master - Student',
-    '/input-student': 'Input - Student',
+    '/': 'Dasbor',
+    '/student': 'Pengelolaan Data Siswa',
+  }
+
+  const handleLogout = () => {
+    window.location.href = "/auth/login"
   }
 
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="mx-4 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 mt-1">
-          <div className='flex justify-between items-center w-full bg-sidebar h-full rounded-xl px-4'>
-            <div className="flex items-center gap-2">
-              <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <h1 className="text-lg font-semibold">
-                {locationName[location.pathname]}
-              </h1>
+        <div className='bg-background w-full sticky top-0 pt-1 z-50'>
+          <Card 
+            className="mx-4 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear 
+              group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12"
+          >
+            <div className='flex justify-between items-center w-full bg-sidebar h-full rounded-xl px-4'>
+              <div className="flex items-center gap-2">
+                <SidebarTrigger className="-ml-1" />
+                <Separator orientation="vertical" className="mr-2 h-4" />
+                <h1 className="text-lg font-semibold">
+                  {locationName[location.pathname]}
+                </h1>
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='font-bold'>
+                  Nama Pengguna
+                </span>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive">
+                      <LogOut />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Apakah Anda yakin?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Anda akan keluar dari akun Anda.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Batalkan</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleLogout}>Lanjutkan</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
             </div>
-            <div className='flex items-center gap-2'>
-              <span className='font-bold'>
-                Nama Pengguna
-              </span>
-              <Button variant="destructive">
-                <LogOut />
-              </Button>
-            </div>
-          </div>
-        </header>
-        <main className='flex flex-auto gap-4 px-4 mt-4 shrink-0 min-h-[100vh]'>
-          <Outlet />
-        </main>
-        <footer className="mx-4 mt-4 mb-1 flex h-16 shrink-0 justify-center items-center gap-2 transition-[width,height] ease-linear bg-sidebar rounded-xl">
+          </Card>
+        </div>
+        <Outlet />
+        <Card className="mx-4 mt-4 mb-1 flex h-16 shrink-0 justify-center items-center gap-2 transition-[width,height] ease-linear bg-sidebar rounded-xl">
           <span className='mr-4'>
-            Zaidan Educare © 2025
+            Zaidan Educare @ 2025
           </span>
           <div className='flex items-center justify-center gap-2'>
             {footerContent.map((content) => (
@@ -86,7 +113,7 @@ const Layout = () => {
               </a>
             ))}
           </div>
-        </footer>
+        </Card>
       </SidebarInset>
     </SidebarProvider>
   )

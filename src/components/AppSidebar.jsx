@@ -10,24 +10,17 @@ import { NavMain } from "@/components/NavMain"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarRail,
   SidebarMenuButton
 } from "@/components/ui/sidebar"
 import { ScrollArea } from "./ui/scroll-area"
 import { redirect } from "react-router"
-import avatarUrl from "@/assets/avatar.jpg"
 import logoUrl from "@/assets/logo.jpeg"
 
 // TODO: Get role from auth here
 const currentUser = "Administrator"
 const data = {
-  user: {
-    name: "Nama",
-    email: "email@example.com",
-    avatar: avatarUrl,
-  },
   navMain: {
     "Ketua Yayasan": [
       {
@@ -96,14 +89,14 @@ const data = {
       },
       {
         title: "Data Siswa",
-        url: "#",
+        url: "/student",
         icon: Database
       },
       {
         title: "Data Transaksi Penerimaan",
         url: "#",
         icon: Database,
-        activeParams: "master",
+        activeParams: "data",
         items: [
           {
             title: "Jenis Biaya Pendidikan",
@@ -135,10 +128,10 @@ export function AppSidebar({ ...props }) {
         >
           <a href="/" className="flex items-center space-x-2">
             <div className="flex aspect-square size-8 items-center justify-center">
-              <img src={logoUrl} className="text-black" />
+              <img src={logoUrl} />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">
+              <span className="truncate font-bold text-lg">
                 Zaidan Educare
               </span>
             </div>

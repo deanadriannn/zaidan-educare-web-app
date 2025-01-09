@@ -2,7 +2,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getFilteredRowModel
+  getPaginationRowModel
 } from "@tanstack/react-table"
 
 import {
@@ -17,44 +17,31 @@ import { ScrollArea, ScrollBar } from "./ui/scroll-area"
 import { useState } from "react"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
+import { Card } from "./ui/card"
 
 export function DataTable({
   columns,
   data,
 }) {
-  const [columnFilters, setColumnFilters] = useState(
-    []
-  )
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 15,
+  });
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
     state: {
-      columnFilters,
+      pagination,
     },
   })
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center py-4">
-          <Input
-            placeholder="Filter nama..."
-            value={(table.getColumn("nama")?.getFilterValue()) ?? ""}
-            onChange={(event) =>
-              table.getColumn("nama")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-        </div>
-        <a href="/input-student">
-          <Button>+ Add</Button>
-        </a>
-      </div>
-      <div className="rounded-md border grid grid-cols-1">
+      <div className="grid grid-cols-1">
         <ScrollArea>
           <Table>
             <TableHeader>
@@ -100,6 +87,25 @@ export function DataTable({
           </Table>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
+        <div className="flex items-center justify-end space-x-2 py-4 mr-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+        
       </div>
     </>
   )

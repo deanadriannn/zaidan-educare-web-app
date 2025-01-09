@@ -39,6 +39,7 @@ export function NavMain({
                   <SidebarMenuButton 
                     tooltip={item.title}
                     className="hover:bg-sidebar-item-hover data-[state=open]:bg-sidebar-item-hover data-[state=open]:text-sidebar-text-hover h-10 text-nowrap"
+                    isActive={location.pathname.includes(item.activeParams)}
                   >
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
@@ -62,7 +63,7 @@ export function NavMain({
             </Collapsible>
           ): (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild tooltip={item.title} className="h-10">
+              <SidebarMenuButton asChild tooltip={item.title} className="h-10" isActive={location.pathname === item.url}>
                 <a href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>

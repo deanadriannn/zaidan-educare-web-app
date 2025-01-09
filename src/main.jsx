@@ -24,10 +24,8 @@ createRoot(document.getElementById('root')).render(
 
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="student" element={<MasterStudent />} />
             <Route path="/input-student" element={<InputStudent />} />
-            <Route path="master">
-              <Route path="student" element={<MasterStudent />} />
-            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
