@@ -1,8 +1,11 @@
 import { DataTable } from "@/components/DataTable"
 import { studentColumns } from "@/lib/columns"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Plus, Upload } from "lucide-react"
+import { Plus, Search, Upload } from "lucide-react"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { useState } from "react"
 
 const data = [
   {
@@ -368,22 +371,69 @@ const data = [
 ]
 
 const MasterStudent = () => {
+  const [name, setName] = useState('')
+  const [nis, setNis] = useState('')
+  const [kelas, setKelas] = useState('')
+
+
+  const handleFilter = (e) => {
+    e.preventDefault()
+    console.log('Filtering')
+    console.log(name, nis, kelas)
+  }
+
   return (
     <>
       <Card className="mx-4 mt-4">
         <CardHeader>
-          <CardTitle>Filters</CardTitle>
+          <CardTitle className="text-xl font-semibold">Filters</CardTitle>
         </CardHeader>
-        <CardContent>
-          
-        </CardContent>
+        <form onSubmit={handleFilter}>
+          <CardContent className="flex justify-center items-center gap-4">
+            <div className="w-full flex flex-col space-y-2">
+              <Label htmlFor="nama" className="text-md">Nama</Label>
+              <Input
+                id="nama"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="w-full flex flex-col space-y-2">
+              <Label htmlFor="nis" className="text-md">NIS</Label>
+              <Input
+                id="nis"
+                type="text"
+                value={nis}
+                onChange={(e) => setNis(e.target.value)}
+              />
+            </div>
+            <div className="w-full flex flex-col space-y-2">
+              <Label htmlFor="kelas" className="text-md">Kelas</Label>
+              <Input
+                id="kelas"
+                type="text"
+                value={kelas}
+                onChange={(e) => setKelas(e.target.value)}
+              />
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-end gap-4">
+            <Button variant="ghost hover:bg-transparent">
+              Reset
+            </Button>
+            <Button type="submit">
+              <Search /> Cari
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
       <Card className="rounded-lg border mx-4 mt-4 shrink-0 flex flex-col gap-4 px-4 pt-4">
         <div className="flex justify-end gap-4">
           <Button>
             <Upload /> Unggah
           </Button>
-          <Button>
+          <Button onClick={() => window.location.href = '/input-student'}>
             <Plus /> Tambah
           </Button>
         </div>

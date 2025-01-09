@@ -51,6 +51,7 @@ const Layout = () => {
   const locationName = {
     '/': 'Dasbor',
     '/student': 'Pengelolaan Data Siswa',
+    '/input-student': 'Formulir Penambahan Data Siswa'
   }
 
   const handleLogout = () => {

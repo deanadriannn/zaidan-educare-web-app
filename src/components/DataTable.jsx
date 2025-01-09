@@ -15,9 +15,7 @@ import {
 } from "@/components/ui/table"
 import { ScrollArea, ScrollBar } from "./ui/scroll-area"
 import { useState } from "react"
-import { Input } from "./ui/input"
 import { Button } from "./ui/button"
-import { Card } from "./ui/card"
 
 export function DataTable({
   columns,
