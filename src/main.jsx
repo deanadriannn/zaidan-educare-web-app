@@ -9,7 +9,6 @@ import Login from './pages/Login'
 import MasterStudent from './pages/MasterStudent'
 import Dashboard from './pages/Dashboard'
 import InputStudent from './pages/InputStudent'
-import { Toaster } from './components/ui/toaster'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

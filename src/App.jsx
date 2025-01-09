@@ -1,10 +1,10 @@
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "react-hot-toast"
 
 function App({children}) {
   return (
     <main>
-      {children}
       <Toaster />
+      {children}
     </main>
   )
 }

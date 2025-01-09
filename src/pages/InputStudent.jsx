@@ -9,7 +9,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ArrowLeft, CircleUserRound, CloudUpload, Save } from 'lucide-react'
-import { useToast } from "@/hooks/use-toast"
 import { useNavigate } from "react-router";
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
@@ -24,9 +23,9 @@ import { useCallback, useState } from 'react'
 import { Card, CardHeader } from '@/components/ui/card'
 import { useDropzone } from 'react-dropzone'
 import { useDayPicker } from 'react-day-picker'
+import toast from 'react-hot-toast'
 
 const InputStudent = () => {
-  const { toast } = useToast()
   let navigate = useNavigate();
   const [bornDate, setBornDate] = useState()
   const [entranceData, setEntranceData] = useState()
@@ -55,10 +54,7 @@ const InputStudent = () => {
   const selectedFiles = acceptedFiles[0]
 
   const handleSubmit = () => {
-    toast({
-      variant: "success",
-      description: "Student data has been saved",
-    })
+    toast.success("Data siswa berhasil ditambahkan")
     navigate("/student");
   }
 
